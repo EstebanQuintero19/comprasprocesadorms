@@ -96,9 +96,7 @@ public class SaleService {
 
         BigDecimal envio = new BigDecimal(10000);
         BigDecimal minimoEnvioGratis = new BigDecimal(150000);
-
         boolean cobraEnvio = sale.getTotalPurchase().compareTo(minimoEnvioGratis) < 0;
-
         sale.setShippingCost(cobraEnvio ? envio : BigDecimal.ZERO);
 
         if (cobraEnvio) {
