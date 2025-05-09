@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "mensaje.certificacion-sales")
+@ConfigurationProperties(prefix = "compras.queues")
 public class PropertiesSaleQueue {
     private String exchangeName;
     private String routingKey;
