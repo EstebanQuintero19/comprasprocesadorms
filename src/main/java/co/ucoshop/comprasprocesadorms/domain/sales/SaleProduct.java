@@ -2,6 +2,7 @@ package co.ucoshop.comprasprocesadorms.domain.sales;
 
 import co.ucoshop.comprasprocesadorms.domain.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,7 +21,6 @@ public class SaleProduct {
 
     @ManyToOne
     @JoinColumn(name = "id_Sale")
-    @JsonIgnore
     private Sale sale;
 
     @ManyToOne
