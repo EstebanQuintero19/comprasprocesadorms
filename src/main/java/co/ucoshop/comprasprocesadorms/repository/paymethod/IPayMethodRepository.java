@@ -1,6 +1,6 @@
 package co.ucoshop.comprasprocesadorms.repository.paymethod;
 
-import co.ucoshop.ucoshopapi.domain.paymethod.PayMethod;
+import co.ucoshop.comprasprocesadorms.domain.paymethod.PayMethod;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

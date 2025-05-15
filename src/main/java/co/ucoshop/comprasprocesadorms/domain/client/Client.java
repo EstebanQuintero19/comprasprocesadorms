@@ -1,8 +1,8 @@
 package co.ucoshop.comprasprocesadorms.domain.client;
 
-import co.ucoshop.ucoshopapi.domain.address.Address;
-import co.ucoshop.ucoshopapi.domain.documenttype.DocumentType;
-import co.ucoshop.ucoshopapi.domain.paymethod.PayMethod;
+import co.ucoshop.comprasprocesadorms.domain.address.Address;
+import co.ucoshop.comprasprocesadorms.domain.documenttype.DocumentType;
+import co.ucoshop.comprasprocesadorms.domain.paymethod.PayMethod;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;

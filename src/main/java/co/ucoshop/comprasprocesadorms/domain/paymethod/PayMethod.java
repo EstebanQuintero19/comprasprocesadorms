@@ -1,7 +1,7 @@
 package co.ucoshop.comprasprocesadorms.domain.paymethod;
 
-import co.ucoshop.ucoshopapi.domain.client.Client;
-import co.ucoshop.ucoshopapi.domain.paymethodtype.PayMethodType;
+import co.ucoshop.comprasprocesadorms.domain.client.Client;
+import co.ucoshop.comprasprocesadorms.domain.paymethodtype.PayMethodType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
