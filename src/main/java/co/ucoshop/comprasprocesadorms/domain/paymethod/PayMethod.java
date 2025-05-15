@@ -1,77 +1,58 @@
 package co.ucoshop.comprasprocesadorms.domain.paymethod;
 
-import co.ucoshop.ucoshopapi.domain.client.Client;
-import co.ucoshop.ucoshopapi.domain.paymethodtype.PayMethodType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import co.ucoshop.comprasprocesadorms.domain.client.Client;
+import co.ucoshop.comprasprocesadorms.domain.paymethodtype.PayMethodType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
+
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name="pay_method")
 public class PayMethod {
 
-    @Setter
-    @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_pay_method")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Setter
-    @Getter
-    @Column(name = "owner", nullable = false)
+    @Column(name = "owner")
     private String owner;
 
-    @Setter
-    @Getter
-    @Column(name = "card_number", nullable = false, unique = true)
+    @Column(name = "card_number")
     private String cardNumber;
 
-    @Setter
-    @Getter
-    @Column(name = "expire_date", nullable = false)
+    @Column(name = "expire_date")
     private String expireDate;
 
-    @Setter
-    @Getter
-    @Column(name = "cvc", nullable = false)
+    @Column(name = "cvc")
     private String cvc;
 
     @ManyToOne
-    @JoinColumn(name = "id_client", nullable = false)
-    @JsonBackReference("client-paymethod")  // ✅ Evita la serialización infinita
-    private Client client;
+    @JoinColumn(name = "id_pay_method_type")
+    private PayMethodType payMethodType;
 
     @ManyToOne
-    @JoinColumn(name = "id_pay_method_type", nullable = false)
-    private PayMethodType payMethodType;  // Relación con el tipo de método de pago
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
+
 
     public PayMethod(){
-
     }
 
-    public PayMethod(UUID id, PayMethodType payMethodType, String owner, String cardNumber, String expireDate, String cvc) {
+    public PayMethod(UUID id, String owner, String cardNumber, String expireDate, String cvc,
+                     PayMethodType payMethodType, Client client) {
         setId(id);
-        setPayMethodType(payMethodType);
         setOwner(owner);
         setCardNumber(cardNumber);
         setExpireDate(expireDate);
         setCvc(cvc);
+        setPayMethodType(payMethodType);
+        setClient(client);
     }
-
-
-    @JsonIgnore
-    public PayMethodType getType() {
-        return payMethodType;
-    }
-
-    public void setPayMethodType(PayMethodType payMethodType) {
-        this.payMethodType = payMethodType;
-    }
-
 }

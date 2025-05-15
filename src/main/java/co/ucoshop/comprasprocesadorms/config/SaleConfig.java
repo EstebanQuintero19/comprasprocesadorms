@@ -6,12 +6,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "compras.queues")
+@ConfigurationProperties(prefix = "sales.queues.sale")
 @Getter
 @Setter
 public class SaleConfig {
-    private String exchangeName;
-    private String routingKey;
-    private String queueName;
-
+    private String createExchangeName;
+    private String createRoutingKey;
+    private String createQueueName;
 }
