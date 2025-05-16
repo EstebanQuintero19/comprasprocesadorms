@@ -23,8 +23,10 @@ public class SaleReceiver {
     public void receiveMessageProcessClient(String message) {
         try {
             System.out.println("Mensaje recibido: " + message);
-            saleService.saveSale(obtenerObjetoDeMensaje(message).get());
-            System.out.println("Mensaje recibido: " + message);
+            obtenerObjetoDeMensaje(message).ifPresentOrElse(
+                    saleService::saveSale,
+                    () -> System.out.println("Error: no se pudo deserializar el mensaje.")
+            );
         } catch (Exception e) {
             System.out.println(e);
 

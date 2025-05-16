@@ -64,6 +64,7 @@ public class SaleService {
         BigDecimal total = detallesVenta.stream()
                 .map(SaleProduct::getSubTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        sale.setPurchaseDate(LocalDate.now().plusDays(15));
         sale.setTotalPurchase(total);
         calcularCostoEnvio(sale);
         return saleRepository.save(sale);

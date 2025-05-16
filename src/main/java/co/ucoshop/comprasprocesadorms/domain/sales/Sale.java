@@ -129,7 +129,6 @@ public class Sale {
 
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
-        this.deliveryDate = purchaseDate.plusDays(15);
     }
 
     public LocalDate getDeliveryDate() {
