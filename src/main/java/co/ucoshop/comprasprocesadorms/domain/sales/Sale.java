@@ -58,21 +58,20 @@ public class Sale {
     @OneToMany (mappedBy = "sale" , fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SaleProduct> saleProducts;
 
-    public Sale(UUID idSale, String email, BigDecimal totalPurchase, boolean forPickup, PayMethod paymentMethod,Address address, LocalDate purchaseDate) {
+    public Sale(UUID idSale, String email, boolean forPickup, BigDecimal totalPurchase, PayMethod paymentMethod, Address address, LocalDate purchaseDate, LocalDate deliveryDate, BigDecimal shippingCost, List<SaleProduct> saleProducts) {
         this.idSale = idSale;
         this.email = email;
-        this.totalPurchase = totalPurchase;
         this.forPickup = forPickup;
+        this.totalPurchase = totalPurchase;
         this.paymentMethod = paymentMethod;
         this.address = address;
-        this.purchaseDate = purchaseDate != null ? purchaseDate : LocalDate.now();
-        this.deliveryDate = this.purchaseDate.plusDays(15);
+        this.purchaseDate = purchaseDate;
+        this.deliveryDate = deliveryDate;
+        this.shippingCost = shippingCost;
+        this.saleProducts = saleProducts;
     }
 
     public Sale() {
-        this.email = "default@ucoshop.com";
-        this.totalPurchase = BigDecimal.ZERO;
-        this.forPickup = false;
     }
 
     public UUID getIdSale() {
@@ -129,7 +128,6 @@ public class Sale {
 
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
-        this.deliveryDate = purchaseDate.plusDays(15);
     }
 
     public LocalDate getDeliveryDate() {
