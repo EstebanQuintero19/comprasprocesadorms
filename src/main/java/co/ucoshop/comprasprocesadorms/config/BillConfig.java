@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class BillConfig {
 
-    private String createEx;
-    private String createRk;
-    private String createQn;
+    private String createExchangeName;
+    private String createRoutingKey;
+    private String createQueueName;
 
-    private String deleteEx;
-    private String deleteRk;
-    private String deleteQn;
+    private String deleteExchangeName;
+    private String deleteRoutingKey;
+    private String deleteQueueName;
 
 }

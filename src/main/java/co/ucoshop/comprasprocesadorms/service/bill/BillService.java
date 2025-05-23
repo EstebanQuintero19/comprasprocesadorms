@@ -52,7 +52,6 @@ public class BillService {
 
         bill.setTotalAmount(total);
         bill.setSubtotalAmount(subtotal);
-        bill.setShippingCost(shippingCost);
         bill.setVat(iva);
         bill.setSale(sale);
 

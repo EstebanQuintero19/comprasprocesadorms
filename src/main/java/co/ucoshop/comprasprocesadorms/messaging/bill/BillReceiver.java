@@ -8,7 +8,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class BillReceiver {
@@ -21,21 +20,25 @@ public class BillReceiver {
         this.billService = billService;
     }
 
-    @RabbitListener(queues = "${sales.queues.bill.create.qn}")
+    @RabbitListener(queues = "${sales.queues.bill.create-queue-name}")
     public void receiveCreateMessage (String message){
         try{
             billService.createBill(obtenerObjetoDeMensaje(message).get());
+            System.out.println("Mensaje " + message);
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println(e);
         }
 
     }
 
-    @RabbitListener(queues = "${sales.queues.bill.delete.qn}")
+    @RabbitListener(queues = "${sales.queues.bill.delete-queue-name}")
     public void receiveDeleteMessage(String message){
         try{
-            billService.deleteBill(UUID.fromString(message));
+            billService.deleteBill(obtenerObjetoDeMensaje(message).get().getBillId());
+            System.out.println("Mensaje recibido: " + message);
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println(e);
         }
 
