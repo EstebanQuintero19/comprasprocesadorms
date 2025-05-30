@@ -11,5 +11,3 @@ import java.util.UUID;
 public interface IPayMethodRepository extends JpaRepository<PayMethod, UUID> {
 }
 
-
- */

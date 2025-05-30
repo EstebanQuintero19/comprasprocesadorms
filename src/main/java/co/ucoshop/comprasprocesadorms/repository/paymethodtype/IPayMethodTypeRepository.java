@@ -12,4 +12,3 @@ public interface IPayMethodTypeRepository extends JpaRepository<PayMethodType, U
 }
 
 
- */

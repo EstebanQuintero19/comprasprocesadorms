@@ -1,5 +1,5 @@
 package co.ucoshop.comprasprocesadorms.domain.sales;
-/*
+
 import co.ucoshop.comprasprocesadorms.domain.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -86,4 +86,3 @@ public class SaleProduct {
 }
 
 
- */

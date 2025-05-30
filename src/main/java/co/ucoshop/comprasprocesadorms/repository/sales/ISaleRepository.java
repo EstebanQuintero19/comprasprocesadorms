@@ -1,5 +1,5 @@
 package co.ucoshop.comprasprocesadorms.repository.sales;
-/*
+
 import co.ucoshop.comprasprocesadorms.domain.sales.Sale;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +14,3 @@ public interface ISaleRepository extends JpaRepository<Sale, UUID> {
 }
 
 
- */

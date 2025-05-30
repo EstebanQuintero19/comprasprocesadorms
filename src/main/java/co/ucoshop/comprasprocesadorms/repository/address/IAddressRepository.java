@@ -10,5 +10,3 @@ import java.util.UUID;
 public interface IAddressRepository extends JpaRepository<Address, UUID> {
 }
 
-
- */

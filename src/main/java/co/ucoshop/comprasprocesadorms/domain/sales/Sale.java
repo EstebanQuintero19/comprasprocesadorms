@@ -1,6 +1,5 @@
 package co.ucoshop.comprasprocesadorms.domain.sales;
 
-/*
 import co.ucoshop.comprasprocesadorms.domain.address.Address;
 import co.ucoshop.comprasprocesadorms.domain.paymethod.PayMethod;
 import jakarta.persistence.*;
@@ -148,4 +147,3 @@ public class Sale {
 }
 
 
- */
