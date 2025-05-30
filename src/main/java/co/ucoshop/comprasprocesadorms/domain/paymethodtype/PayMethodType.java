@@ -7,28 +7,27 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Setter
 @Getter
+@Setter
 @Data
 @Entity
-@Table(name = "payMethodType")
+@Table(name = "pay_method_type")
 public class PayMethodType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_pay_method_type", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name="name", nullable = false)
+    @Column(name="name")
     private String name;
 
-    public PayMethodType(){
 
+    public PayMethodType(){
     }
 
     public PayMethodType(UUID id, String name) {
         setId(id);
         setName(name);
     }
-
 }
