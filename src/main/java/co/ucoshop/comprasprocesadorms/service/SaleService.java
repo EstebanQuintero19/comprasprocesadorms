@@ -1,5 +1,5 @@
 package co.ucoshop.comprasprocesadorms.service;
-
+/*
 import co.ucoshop.comprasprocesadorms.domain.address.Address;
 import co.ucoshop.comprasprocesadorms.domain.paymethod.PayMethod;
 import co.ucoshop.comprasprocesadorms.domain.product.Product;
@@ -104,3 +104,5 @@ public class SaleService {
         }
     }
 }
+
+ */

@@ -1,5 +1,5 @@
 package co.ucoshop.comprasprocesadorms.domain.client;
-
+/*
 import co.ucoshop.ucoshopapi.domain.address.Address;
 import co.ucoshop.ucoshopapi.domain.documenttype.DocumentType;
 import co.ucoshop.ucoshopapi.domain.paymethod.PayMethod;
@@ -83,3 +83,5 @@ public class Client {
 
 
 }
+
+ */

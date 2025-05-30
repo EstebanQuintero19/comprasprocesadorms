@@ -1,5 +1,5 @@
 package co.ucoshop.comprasprocesadorms.domain.paymethod;
-
+/*
 import co.ucoshop.ucoshopapi.domain.client.Client;
 import co.ucoshop.ucoshopapi.domain.paymethodtype.PayMethodType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -75,3 +75,4 @@ public class PayMethod {
     }
 
 }
+*/

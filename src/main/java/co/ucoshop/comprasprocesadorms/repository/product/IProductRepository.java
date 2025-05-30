@@ -14,4 +14,5 @@ public interface IProductRepository extends JpaRepository<Product, UUID>  {
     Page<Product> findAll(Pageable pageable);
     Optional<Product> findById(UUID productId);
     Page<Product> findAllByEmail(String email, Pageable pageable);
+
 }

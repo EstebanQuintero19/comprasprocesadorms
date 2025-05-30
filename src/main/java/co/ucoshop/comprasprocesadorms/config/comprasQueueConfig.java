@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ConfigurationProperties(prefix = "compras.procesar")
-@PropertySource("classpath:compras.properties")
+@ConfigurationProperties(prefix = "")
+@PropertySource("classpath:application.properties")
 @Getter
 @Setter
-public class cartQueueConfig {
+public class comprasQueueConfig {
     private String exchangeName;
     private String routingKey;
     private String queueName;

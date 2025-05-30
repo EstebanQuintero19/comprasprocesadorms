@@ -26,29 +26,15 @@ public class CartService {
         this.itemCartRepository = itemCartRepository;
     }
 
-    //Listar items
-    public Map<String, Object> getCartDataByEmail(String email) {
-        Cart cart = getCartByUserEmail(email);
-        List<ItemCart> items = itemCartRepository.findByCart(cart);
-        if (validateAndUpdateItemPrices(items)) {
-            cart.setTotal(calculateTotal(items));
-            cartRepository.save(cart);
-        }
-        Map<String, Object> response = new HashMap<>();
-        response.put("cartId", cart.getCartId());
-        response.put("userEmail", cart.getUserEmail());
-        response.put("total", cart.getTotal());
-        response.put("items", items);
-        return response;
-    }
-
-
     //Registrar items carrito o agregar
     public Cart addItemCart(String userEmail, UUID productId, Integer quantity) {
+        if( quantity == null || quantity <= 0 ) {
+            throw new IllegalArgumentException("El quantity debe ser mayor que 0");
+        }
         Cart cart = getOrCreateCart(userEmail);
         Product product = getProductById(productId);
         List<ItemCart> cartItems = getItemsByCartId(cart.getCartId());
-        boolean updated = validateAndUpdateItemPrices(cartItems);
+        validateAndUpdateItemPrices(cartItems);
         Optional<ItemCart> existingItem = cartItems.stream()
                 .filter(item -> item.getProduct().getId().equals(productId))
                 .findFirst();
@@ -57,27 +43,31 @@ public class CartService {
         }else{
             addNewItem(cart,product,quantity);
         }
-        if (updated) {
-            cart.setTotal(calculateTotal(cartItems));
-        }
+        cart.setTotal(calculateTotal(getItemsByCartId(cart.getCartId())));
         return cartRepository.save(cart);
     }
 
 
     //Reducir items carrito
     public Cart reduceItemCart(String userEmail, UUID productId, Integer quantity) {
+        if( quantity == null || quantity <= 0 ) {
+            throw new IllegalArgumentException("El quantity debe ser mayor que 0");
+        }
         Cart cart = getCartByUserEmail(userEmail);
         Product product = getProductById(productId);
         List<ItemCart> cartItems = getItemsByCartId(cart.getCartId());
         validateAndUpdateItemPrices(cartItems);
         ItemCart item = findItemInCart(cartItems, productId);
-        if (item != null) {
-            updateOrRemoveItem(item,product,quantity);
-            BigDecimal total = calculateTotal(cartItems);
-            cart.setTotal(total);
-            return cartRepository.save(cart);
+        if (item == null) {
+            throw new NoSuchElementException( "El producto con id " + productId + " no se encontró en el carrito.");
         }
-        return cart;
+        int newQuantity = item.getQuantity() - quantity;
+        if (newQuantity < 0) {
+            throw new IllegalArgumentException("No se puede reducir la cantidad más de lo existente en el carrito.");
+        }
+        updateOrRemoveItem(item, product, quantity);
+        cart.setTotal(calculateTotal(getItemsByCartId(cart.getCartId())));
+        return cartRepository.save(cart);
     }
 
 
@@ -102,15 +92,18 @@ public class CartService {
 
 
     private Cart getCartByUserEmail(String userEmail) {
-        return cartRepository.findByUserEmail(userEmail).orElseThrow(()-> new NoSuchElementException("Carrito no encontrado"));
+        return cartRepository.findByUserEmail(userEmail)
+                .orElseThrow(()-> new NoSuchElementException("Carrito no encontrado para el usuario: "+userEmail));
     }
 
     private Cart getOrCreateCart(String userEmail) {
-        return cartRepository.findByUserEmail(userEmail).orElseGet(()->createNewCart(userEmail));
+        return cartRepository.findByUserEmail(userEmail)
+                .orElseGet(()->createNewCart(userEmail));
     }
 
     private Product getProductById(UUID productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Producto no encontrado"));
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new NoSuchElementException("Producto no encontrado con id: "+productId));
     }
 
     private List<ItemCart> getItemsByCartId(UUID cartId) {
@@ -181,7 +174,7 @@ public class CartService {
         return itemCartRepository.findByCart_CartId(cart.getCartId()).stream()
                 .filter(i -> i.getProduct().getId().equals(productId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado en el carrito"));
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado en el carrito con id: "+productId));
     }
 
     private void updateCartTotal(Cart cart) {

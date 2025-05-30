@@ -1,4 +1,5 @@
 package co.ucoshop.comprasprocesadorms.domain.address;
+/*
 import co.ucoshop.comprasprocesadorms.domain.client.Client;
 import co.ucoshop.comprasprocesadorms.domain.country.Country;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -47,3 +48,5 @@ public class Address {
     }
 
 }
+
+ */
