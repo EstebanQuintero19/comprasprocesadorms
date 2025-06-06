@@ -5,12 +5,12 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+@Configuration
+@ConfigurationProperties(prefix = "sales.queues.sale")
 @Getter
 @Setter
-@Configuration
-@ConfigurationProperties(prefix = "mensaje.certificacion-sales")
-public class PropertiesSaleQueue {
-    private String exchangeName;
-    private String routingKey;
-    private String queueName;
+public class SaleConfig {
+    private String createExchangeName;
+    private String createRoutingKey;
+    private String createQueueName;
 }
