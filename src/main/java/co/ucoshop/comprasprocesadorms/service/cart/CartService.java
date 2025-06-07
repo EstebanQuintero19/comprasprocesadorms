@@ -133,6 +133,7 @@ public class CartService {
     private Cart createNewCart(String userEmail) {
         Cart newCart = new Cart();
         newCart.setUserEmail(userEmail);
+        newCart.setTotal(BigDecimal.ZERO);
         return cartRepository.save(newCart);
     }
 
